@@ -1,5 +1,5 @@
 ﻿# -----------------------------------------------------------------------------------
-# getxchtx - Windows Powershell Edition
+# XCH Transaction Exporter : getxchtxPS - Windows Powershell Edition
 # Generate a list of transactions for Chia (XCH) into a CSV file.
 #
 # Disclaimer: For educational purposes only. This is not tax, nor financial advice. 
@@ -240,15 +240,11 @@ Write-Output $csv.ToString()
 
 cd $scripthome
 
-
-# TODO LIST
-# x filter by year.
-# x filter by min.
-# x filter by max.
-# x filter by type.
-# x change output based on normal/verbose
-# * create markup for script
-#   - including running from within Powershell
-#   - disclaimer: not a tax professional
-#   - note about mixing offset/limit with year/type/mix/max filters
-
+# Version History
+#
+# v0.1.0 - Initial Release:
+#            - Basic functionality. Will generate a list of transactions for Chia (XCH) and
+#                put into a CSV file. Pulls details for each transaction using Chia wallet commands.
+#            - Output was sent to the screen. Must use command line redirection to save to a file.
+#                .\getxchtxPS -f 3812331296 -i 1 >my_transactions.csv
+# 
