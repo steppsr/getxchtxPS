@@ -4,7 +4,7 @@ Generate a list of transactions for Chia (XCH) into a CSV file.
 
 ---
 
-**getxchtxPS.ps1** - The script pulls all your transactions into a json file by Chia CLI commands, then loops through each transaction building a CSV file. 
+**getxchtxPS.ps1** - The script pulls all your transactions into a json file by using Chia CLI commands, then loops through each transaction building a CSV file. 
 
 ---
 
