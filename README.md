@@ -1,15 +1,15 @@
-## XCH Transaction Exporter : getxchtxPS [Powershell Edition]
+## XCH Transaction Exporter : getxchtx [Powershell Edition]
 
 Generate a list of transactions for Chia (XCH) into a CSV file.
 
 ---
 
-**getxchtxPS.ps1** - The script pulls all your transactions into a json file by using Chia CLI commands, then loops through each transaction building a CSV file. 
+**getxchtxPS.ps1** - The script pulls all your transactions into a json file by Chia CLI commands, then loops through each transaction building a CSV file. 
 
 ---
 
 ```
-Usage: chia wallet get_transactions [OPTIONS]
+Usage: .\getxchtxPS [OPTIONS]
 
 Options:
   -f INTEGER       Set the fingerprint to specify which wallet to use  [required]

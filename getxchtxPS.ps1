@@ -14,7 +14,7 @@ Function Mojo2XCH ($amount) {
 }
 
 Function Usage() {
-    Write-Output "Usage: chia wallet get_transactions [OPTIONS]"
+    Write-Output "Usage: .\getxchtxPS [OPTIONS]"
     Write-Output ""
     Write-Output "Options:"
     Write-Output "  -f INTEGER       Set the fingerprint to specify which wallet to use  [required]"
@@ -38,10 +38,10 @@ Function Usage() {
     Write-Output "Do not use -o or -l with any of the filter options (year, min, max, type)."
     Write-Output ""
     Write-Output "Example:"
-    Write-Output "     .\getxchtx.sh -y 2021 -v"
+    Write-Output "     .\getxchtxPS -y 2021 -v"
     Write-Output ""
     Write-Output "Example for saving to file:"
-    Write-Output "     .\getxchtx.sh -y 2021 >tx_list.csv"
+    Write-Output "     .\getxchtxPS -y 2021 >tx_list.csv"
 }
 
 # set our defaults
@@ -248,3 +248,4 @@ cd $scripthome
 #            - Output was sent to the screen. Must use command line redirection to save to a file.
 #                .\getxchtxPS -f 3812331296 -i 1 >my_transactions.csv
 # 
+
