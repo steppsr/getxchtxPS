@@ -32,8 +32,8 @@ Function Usage() {
     Write-Output "                           3 FEE_REWARD"
     Write-Output "                           4 INCOMING_TRADE"
     Write-Output "                           5 OUTGOING_TRADE"
-    Write-Output "  -v, --verbose"
-    Write-Output "  -h, --help       Show this message and exit."
+    Write-Output "  -v               Verbose output"
+    Write-Output "  -h, --help       Show this message and exit"
     Write-Output ""
     Write-Output "Do not use -o or -l with any of the filter options (year, min, max, type)."
     Write-Output ""
@@ -41,7 +41,7 @@ Function Usage() {
     Write-Output "     .\getxchtxPS -y 2021 -v"
     Write-Output ""
     Write-Output "Example for saving to file:"
-    Write-Output "     .\getxchtxPS -y 2021 >tx_list.csv"
+    Write-Output "     .\getxchtxPS -y 2021 > tx_list.csv"
 }
 
 # set our defaults
