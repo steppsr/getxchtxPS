@@ -9,12 +9,14 @@ Generate a list of transactions for Chia (XCH) into a CSV file.
 ---
 
 **How to Get the Script**
+
 You can just right-click on the **getxchtxPS.ps1** file and choose _Save link as..._ Save this file into a directory on your machine that you want to keep the script and the CSV file. I would suggest creating a new directory under Documents. 
 
 **\*** If you download the full Zip file, you will need to extract the files first and store them in a directory.
 
 
 **How to Open Powershell**
+
 Type _powershell_ into the search box by the Windows Start button.
 Right-click the Windows Powershell app and choose _Run as Administrator_
 You need to change the directory to the location you have the script. Be sure to replace **steve** with your username, and also **1.3.1** with your current version number.
@@ -24,12 +26,14 @@ cd C:\Users\steve\AppData\Local\chia-blockchain\app-1.3.1\resources\app.asar.unp
 ```
 
 **Do you know your fingerprint?**
+
 You will need the fingerprint of your wallet. If you don't know the fingerprint you can run the following command:
 
 ```
 chia keys show
 ```
 **Now change to the script directory**
+
 Now to run the script, you will need change to the directory where you saved the file.
 
 ```
@@ -37,6 +41,7 @@ cd C:\Users\Steve\Documents\Chia\getxchtxPS
 ```
 
 **And finally, run the script**
+
 In this example my fingerprint is **3812331296**, you will need to replace that with the fingerprint of your wallet. I also passed in the command option for just transactions from 2021 and used the **>** symbol and my filename to write the data into a file instead of to the screen. You can run it without the **> filename.csv** first to see what the output will look like.
 
 ```
@@ -44,6 +49,7 @@ In this example my fingerprint is **3812331296**, you will need to replace that 
 ```
 
 **Advanced Features**
+
 You could use multiple command options to get a variety of different results. By default the script will use **wallet_id** of **1** which is the _STANDARD\_WALLET_. Passing in the **wallet_id** for a CAT wallet, will list the transactions for only that CAT wallet.
 
 If you want to run the script for more than one **wallet_id** and have all the transactions in one file, you should replace the **>** with **>>** on each run **after** the first one. The first should always be **>** because that start a new empty file. **>>* is how you _append_ to an existing file instead of creating a new one.
