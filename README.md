@@ -1,7 +1,7 @@
 ## XCH Transaction Exporter : getxchtx [Powershell Edition]
 
 Generate a list of transactions for Chia (XCH) into a CSV file.
-
+***More documentation coming soon on how to run.***
 ---
 
 **getxchtxPS.ps1** - The script pulls all your transactions into a json file by Chia CLI commands, then loops through each transaction building a CSV file. 
@@ -33,10 +33,10 @@ Options:
 Do not use -o or -l with any of the filter options (year, min, max, type).
 
 Example:
-     .\getxchtxPS -y 2021 -v
+     .\getxchtxPS -y 2021 -f 3812331296 -v
 
 Example for saving to file:
-     .\getxchtxPS -y 2021 >tx_list.csv
+     .\getxchtxPS -y 2021 -f 3812331296 > tx_list.csv
 
 ```
 
