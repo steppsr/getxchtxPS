@@ -9,14 +9,12 @@ Generate a list of transactions for Chia (XCH) into a CSV file.
 ---
 
 **How to Get the Script**
-
 You can just right-click on the **getxchtxPS.ps1** file and choose _Save link as..._ Save this file into a directory on your machine that you want to keep the script and the CSV file. I would suggest creating a new directory under Documents. 
 
 **\*** If you download the full Zip file, you will need to extract the files first and store them in a directory.
 
 
 **How to Open Powershell**
-
 Type _powershell_ into the search box by the Windows Start button.
 Right-click the Windows Powershell app and choose _Run as Administrator_
 You need to change the directory to the location you have the script. Be sure to replace **steve** with your username, and also **1.3.1** with your current version number.
@@ -25,15 +23,19 @@ You need to change the directory to the location you have the script. Be sure to
 cd C:\Users\steve\AppData\Local\chia-blockchain\app-1.3.1\resources\app.asar.unpacked\daemon
 ```
 
-**Do you know your fingerprint?**
+**Change your Execution Policy for Powershell** You may need to change the ExecutionPolicy for Powershell so it will allow you to run a script.
 
+```
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass
+```
+
+**Do you know your fingerprint?**
 You will need the fingerprint of your wallet. If you don't know the fingerprint you can run the following command:
 
 ```
 chia keys show
 ```
 **Now change to the script directory**
-
 Now to run the script, you will need change to the directory where you saved the file.
 
 ```
@@ -41,7 +43,6 @@ cd C:\Users\Steve\Documents\Chia\getxchtxPS
 ```
 
 **And finally, run the script**
-
 In this example my fingerprint is **3812331296**, you will need to replace that with the fingerprint of your wallet. I also passed in the command option for just transactions from 2021 and used the **>** symbol and my filename to write the data into a file instead of to the screen. You can run it without the **> filename.csv** first to see what the output will look like.
 
 ```
@@ -49,7 +50,6 @@ In this example my fingerprint is **3812331296**, you will need to replace that 
 ```
 
 **Advanced Features**
-
 You could use multiple command options to get a variety of different results. By default the script will use **wallet_id** of **1** which is the _STANDARD\_WALLET_. Passing in the **wallet_id** for a CAT wallet, will list the transactions for only that CAT wallet.
 
 If you want to run the script for more than one **wallet_id** and have all the transactions in one file, you should replace the **>** with **>>** on each run **after** the first one. The first should always be **>** because that start a new empty file. **>>* is how you _append_ to an existing file instead of creating a new one.
@@ -100,6 +100,7 @@ Example for saving to file:
 Below is a sample of the output in normal mode (without the Verbose option):
 
 ```
+tx_name,tx_datetime,tx_type,tx_amount,current_price
 0x84ec3be356271402070c8c72ad8fb299783c9f9c7ae321b127aa090fc50f320c,04/14/2022 21:15:27,FEE_REWARD,0.25,0
 0xd6199a6c6935dc170c573129cbe4527800807e8712d51118aa40e670cc43dc96,04/14/2022 20:43:27,FEE_REWARD,0.25,0
 0xcb6e50c106a16498edb0f85fe8d4d2e26e2edf4f15a906af1345cda6c5a83798,04/14/2022 20:42:52,FEE_REWARD,0.25,0
@@ -112,6 +113,7 @@ Below is a sample of the output in normal mode (without the Verbose option):
 Below is an example of the output in Verbose mode:
 
 ```
+tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_additions,tx_confirmed,tx_confirmed_at_height,tx_fee_amount,tx_memos,tx_removals,tx_sent,tx_sent_to,tx_spend_bundle,tx_to_address,tx_to_puzzle_hash,tx_trade_id,tx_wallet_id
 0x84ec3be356271402070c8c72ad8fb299783c9f9c7ae321b127aa090fc50f320c,04/14/2022 21:15:27,FEE_REWARD,0.25,0,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2
 000000000000000000000000000cc218; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,836124,0,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218e
 eefd947fec37208c5e810d85b2,none,1
