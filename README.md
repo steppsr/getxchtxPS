@@ -8,13 +8,13 @@ Generate a list of transactions for Chia (XCH) into a CSV file.
 
 ---
 
-**How to Get the Script**
+**How to Get the Script.**
 You can just right-click on the **getxchtxPS.ps1** file and choose _Save link as..._ Save this file into a directory on your machine that you want to keep the script and the CSV file. I would suggest creating a new directory under Documents. 
 
 **\*** If you download the full Zip file, you will need to extract the files first and store them in a directory.
 
 
-**How to Open Powershell**
+**How to Open Powershell.**
 Type _powershell_ into the search box by the Windows Start button.
 Right-click the Windows Powershell app and choose _Run as Administrator_
 You need to change the directory to the location you have the script. Be sure to replace **steve** with your username, and also **1.3.1** with your current version number.
@@ -23,7 +23,7 @@ You need to change the directory to the location you have the script. Be sure to
 cd C:\Users\steve\AppData\Local\chia-blockchain\app-1.3.1\resources\app.asar.unpacked\daemon
 ```
 
-**Change your Execution Policy for Powershell** You may need to change the ExecutionPolicy for Powershell so it will allow you to run a script.
+**Change your Execution Policy for Powershell.** You may need to change the ExecutionPolicy for Powershell so it will allow you to run a script.
 
 ```
 C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass
@@ -35,21 +35,21 @@ You will need the fingerprint of your wallet. If you don't know the fingerprint 
 ```
 .\chia keys show
 ```
-**Now change to the script directory**
+**Now change to the script directory.**
 Now to run the script, you will need change to the directory where you saved the file.
 
 ```
 cd C:\Users\Steve\Documents\Chia\getxchtxPS
 ```
 
-**And finally, run the script**
+**And finally, run the script.**
 In this example my fingerprint is **3812331296**, you will need to replace that with the fingerprint of your wallet. I also passed in the command option for just transactions from 2021 and used the **>** symbol and my filename to write the data into a file instead of to the screen. You can run it without the **> filename.csv** first to see what the output will look like.
 
 ```
 .\getxchtxPS -f 3812331296 -y 2021 > chia_transactions_2021.csv
 ```
 
-**Advanced Features**
+**Advanced Features.**
 You could use multiple command options to get a variety of different results. By default the script will use **wallet_id** of **1** which is the _STANDARD\_WALLET_. Passing in the **wallet_id** for a CAT wallet, will list the transactions for only that CAT wallet.
 
 If you want to run the script for more than one **wallet_id** and have all the transactions in one file, you should replace the **>** with **>>** on each run **after** the first one. The first should always be **>** because that start a new empty file. **>>* is how you _append_ to an existing file instead of creating a new one.
@@ -100,49 +100,30 @@ Example for saving to file:
 Below is a sample of the output in normal mode (without the Verbose option):
 
 ```
-tx_name,tx_datetime,tx_type,tx_amount,current_price
-0x84ec3be356271402070c8c72ad8fb299783c9f9c7ae321b127aa090fc50f320c,04/14/2022 21:15:27,FEE_REWARD,0.25,0
-0xd6199a6c6935dc170c573129cbe4527800807e8712d51118aa40e670cc43dc96,04/14/2022 20:43:27,FEE_REWARD,0.25,0
-0xcb6e50c106a16498edb0f85fe8d4d2e26e2edf4f15a906af1345cda6c5a83798,04/14/2022 20:42:52,FEE_REWARD,0.25,0
-0xdff0766926c97bf2cfc238d14418458d452af47acb1ab8e3016b7035766c7af9,04/14/2022 20:40:40,FEE_REWARD,0.25,0
-0x735a475096e93485fa857b302b4a8cec203794c3f841c6daa34c45d7ebec5e27,04/13/2022 10:29:38,OUTGOING_TX,0.000000000001,0
-0x643308a2707d8c14a1bbbebe774cb9aef379f4f937217481da0c5d80a42b7ecb,04/12/2022 20:20:42,OUTGOING_TX,0.00000000001,0
-0x3b07a7c330c16020c582f589ab1f6b2e6833b09d92035d835e402fe0696e8cb4,03/31/2022 20:42:28,INCOMING_TX,1,0
+fingerprint,tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_fee_amount
+3812331296,0x016672871817ce424d059d5f9814036a7928941c386eca2efdac22faed39f40f,04/16/2022 19:08:41,FEE_REWARD,0.25,0,0
+3812331296,0xd5218c73522bc85c45bd7584b4fc012c1c354612ef4481358319dcfe871f89c8,04/16/2022 18:45:12,FEE_REWARD,0.25,0,0
+3812331296,0x4c67fcd39f40e925927f767e0034b49fa1cd101b87ddedaa4c7a692abf636211,04/16/2022 18:43:00,FEE_REWARD,0.25,0,0
+3812331296,0xc330f0492efb655f45f5dd877bda9c9e2cf71b55065082d0cd39056476dd45c0,04/16/2022 18:39:53,FEE_REWARD,0.25,0,0
+3812331296,0x2c55094551c4692d70f1a1736c0f1ec4b796b4139196738e390acc83d644f501,04/16/2022 18:39:53,FEE_REWARD,0.25,0,0
+3812331296,0xf24e07f506e8c9f4b57c7b334ec4c22be9d73934913a43e4a0dcdf409525988c,04/16/2022 18:13:37,FEE_REWARD,0.25,0,0
+3812331296,0x5478659950f732b2b3b3198474a3715785456c887a862fccb44a9fa15f4b593b,04/16/2022 18:11:16,FEE_REWARD,0.25,0,0
+3812331296,0xf1db488d334823f73983da1f0777a8990bb5a5f51b152559db8a03c2e6ec4f65,04/16/2022 18:04:58,FEE_REWARD,0.25,0,0
 ```
 
 Below is an example of the output in Verbose mode:
 
 ```
-tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_additions,tx_confirmed,tx_confirmed_at_height,tx_fee_amount,tx_memos,tx_removals,tx_sent,tx_sent_to,tx_spend_bundle,tx_to_address,tx_to_puzzle_hash,tx_trade_id,tx_wallet_id
-0x84ec3be356271402070c8c72ad8fb299783c9f9c7ae321b127aa090fc50f320c,04/14/2022 21:15:27,FEE_REWARD,0.25,0,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2
-000000000000000000000000000cc218; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,836124,0,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218e
-eefd947fec37208c5e810d85b2,none,1
-0xd6199a6c6935dc170c573129cbe4527800807e8712d51118aa40e670cc43dc96,04/14/2022 20:43:27,FEE_REWARD,0.25,0,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2
-000000000000000000000000000cc1a0; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,836003,0,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218e
-eefd947fec37208c5e810d85b2,none,1
-0xcb6e50c106a16498edb0f85fe8d4d2e26e2edf4f15a906af1345cda6c5a83798,04/14/2022 20:42:52,FEE_REWARD,0.25,0,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2
-000000000000000000000000000cc19f; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,836001,0,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218e
-eefd947fec37208c5e810d85b2,none,1
-0xdff0766926c97bf2cfc238d14418458d452af47acb1ab8e3016b7035766c7af9,04/14/2022 20:40:40,FEE_REWARD,0.25,0,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2
-000000000000000000000000000cc19a; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,835996,0,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218e
-eefd947fec37208c5e810d85b2,none,1
-0x735a475096e93485fa857b302b4a8cec203794c3f841c6daa34c45d7ebec5e27,04/13/2022 10:29:38,OUTGOING_TX,0.000000000001,0,@{amount=1; parent_coin_info=0xc49aefc4fb0bf8c5fd61d3cfceb2d7a1
-ac226791891b3321edded1479cc31954; puzzle_hash=0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9}@{amount=999999999788; parent_coin_info=0xc49aefc4fb0bf8c5fd61d3cf
-ceb2d7a1ac226791891b3321edded1479cc31954; puzzle_hash=0x8342111338168ec0e7a224409079131225d12e5ee5b1903c280481f4b9990d0a}@{amount=1; parent_coin_info=0x9dbdbe6b40e0a467ac515f23d4a
-c85e3ccdcefe41d9644e96e1f918d02725090; puzzle_hash=0x27a9356a5a7b9c9bd1306d7ddd33ca4159ee5b6db38f1ad1985ee2d6cb935581},True,829842,0.000000000001,, ,1,8ef74c0d7d602955027425fa4921
-378c0cd71ab9c31f8f82e60bddb726a84432 3 NO_TRANSACTIONS_WHILE_SYNCING,@{aggregated_signature=0xa6804e6aba70625a50f8323c99dd8e1b7edd1078b110e6fe8da3fd53c83e94def828585ca0bd14c26f4a1
-9e7b41034ab186127a0f41fad265c27eb288e3fb550e43bc0581138b453727bdd2003cd3625efe3f67dd3c40aac858aafd3aa32343f; coin_spends=System.Object[]},,0x27a9356a5a7b9c9bd1306d7ddd33ca4159ee5b
-6db38f1ad1985ee2d6cb935581,none,1
-0x643308a2707d8c14a1bbbebe774cb9aef379f4f937217481da0c5d80a42b7ecb,04/12/2022 20:20:42,OUTGOING_TX,0.00000000001,0,@{amount=10; parent_coin_info=0x3b07a7c330c16020c582f589ab1f6b2e
-6833b09d92035d835e402fe0696e8cb4; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2}@{amount=999999999790; parent_coin_info=0x3b07a7c330c16020c582f589
-ab1f6b2e6833b09d92035d835e402fe0696e8cb4; puzzle_hash=0x005c1be39099bc84903231a4a74e9fdb5ba54adfc9b971e874604ed923cbab64},True,827113,0.0000000002,0x8457a52308c198c8ea1dbfc1c501cc
-36e5442e1af02d8f172d8bdb4002c611b3 System.Object[],,2,8ef74c0d7d602955027425fa4921378c0cd71ab9c31f8f82e60bddb726a84432 3 NO_TRANSACTIONS_WHILE_SYNCINGf6edf3bf9faa987f521c2cca67dec
-59fed0d31e3fd9009785ba1fab2b0a7f2c0 3 DOUBLE_SPEND,@{aggregated_signature=0xa8ca27b095c03498ac37ef488d5fff1e471f8767cb2d02878ac5db29feae87a8994f33be7186e5e9189d830a6162debc0973af6
-154c95a541102d0aab6b02ce324e347bb7eafb0163ecacf699be522b27430420c3fc2b0851ea5d5e089845e70; coin_spends=System.Object[]},,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e
-810d85b2,none,1
-0x3b07a7c330c16020c582f589ab1f6b2e6833b09d92035d835e402fe0696e8cb4,03/31/2022 20:42:28,INCOMING_TX,1,0,@{amount=1000000000000; parent_coin_info=0x3881d0ab5e7f57a48242ff5578b65c470
-44fb836403feba4a63092e01622aa99; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,771573,0,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218ee
-efd947fec37208c5e810d85b2,none,1
+fingerprint,tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_fee_amount,tx_created_at_time,tx_addition
+s,tx_confirmed,tx_confirmed_at_height,tx_memos,tx_removals,tx_sent,tx_sent_to,tx_spend_bundle,tx_to_address,tx_to_puzzle_hash,tx_trade_id,tx_wallet_id
+3812331296,0xb264aa0df6d6591ec9b4499c06ff6f63f01e2f1054fd662185552fe952627a95,04/16/2022 20:33:35,FEE_REWARD,0.25,0,0,1650159215,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce59a; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,845215,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0x061e1f070cd0c3e0e5dac198f67a2482e2d687fccdbf5692884aef1e658d759e,04/16/2022 20:00:09,FEE_REWARD,0.25,0,0,1650157209,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce536; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,845115,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0x016672871817ce424d059d5f9814036a7928941c386eca2efdac22faed39f40f,04/16/2022 19:08:41,FEE_REWARD,0.25,0,0,1650154121,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce497; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,844952,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0xd5218c73522bc85c45bd7584b4fc012c1c354612ef4481358319dcfe871f89c8,04/16/2022 18:45:12,FEE_REWARD,0.25,0,0,1650152712,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce459; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,844892,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0x4c67fcd39f40e925927f767e0034b49fa1cd101b87ddedaa4c7a692abf636211,04/16/2022 18:43:00,FEE_REWARD,0.25,0,0,1650152580,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce458; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,844890,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0xc330f0492efb655f45f5dd877bda9c9e2cf71b55065082d0cd39056476dd45c0,04/16/2022 18:39:53,FEE_REWARD,0.25,0,0,1650152393,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce44e; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,844882,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0x2c55094551c4692d70f1a1736c0f1ec4b796b4139196738e390acc83d644f501,04/16/2022 18:39:53,FEE_REWARD,0.25,0,0,1650152393,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce44d; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,844882,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
+3812331296,0xf24e07f506e8c9f4b57c7b334ec4c22be9d73934913a43e4a0dcdf409525988c,04/16/2022 18:13:37,FEE_REWARD,0.25,0,0,1650150817,@{amount=250000000000; parent_coin_info=0xfc0af20d20c4b3e92ef2a48bd291ccb2000000000000000000000000000ce403; puzzle_hash=0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2},True,844807,,,0,,none,,0xec9d7c3abef4cb992e272c3faaf1514138218eeefd947fec37208c5e810d85b2,none,1
 ```
 
 ---

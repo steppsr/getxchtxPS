@@ -85,7 +85,7 @@ cd $path
 
 # command options for fingerprint, wallet_it, offset, limit, and verbose are sent to the Chia get_transaction command
 # chia command must include -v for verbose. the command option for verbose of this script is used below for the CSV file
-$json=chia wallet get_transactions -f $fingerprint -i $wallet_id -o $offset -l $limit -v --no-paginate
+$json=.\chia wallet get_transactions -f $fingerprint -i $wallet_id -o $offset -l $limit -v --no-paginate
 
 # change the directory into the powershell script path
 cd $scripthome
@@ -121,9 +121,9 @@ $transactions = ($fix | ConvertFrom-Json)
 # setup a header for both normal and verbose
 # write header to CSV file
 if ($verbose -eq "true") {
-    [void]$csv.AppendLine("tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_additions,tx_confirmed,tx_confirmed_at_height,tx_fee_amount,tx_memos,tx_removals,tx_sent,tx_sent_to,tx_spend_bundle,tx_to_address,tx_to_puzzle_hash,tx_trade_id,tx_wallet_id")
+    [void]$csv.AppendLine("fingerprint,tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_fee_amount,tx_created_at_time,tx_additions,tx_confirmed,tx_confirmed_at_height,tx_memos,tx_removals,tx_sent,tx_sent_to,tx_spend_bundle,tx_to_address,tx_to_puzzle_hash,tx_trade_id,tx_wallet_id")
 } else {
-    [void]$csv.AppendLine("tx_name,tx_datetime,tx_type,tx_amount,current_price")
+    [void]$csv.AppendLine("fingerprint,tx_name,tx_datetime,tx_type,tx_amount,current_price,tx_fee_amount")
 }
 
 # loop through transactions and process
@@ -209,18 +209,20 @@ foreach ($transaction in $transactions)
     $tx_current_price = 0
 
     # these first few fields will be for the normal output
-    $row = $tx_name
+    $row = $fingerprint.ToString()
+    $row = $row + "," + $tx_name
     $row = $row + "," + $tx_datetime
     $row = $row + "," + $tx_typedesc
     $row = $row + "," + $tx_amount
     $row = $row + "," + $tx_current_price
+    $row = $row + "," + $tx_fee_amount
 
     # check to see if command option for verbose is selected
     if ($verbose -eq "true") {
+        $row = $row + "," + $tx_created_at_time
         $row = $row + "," + $tx_addfields
         $row = $row + "," + $tx_confirmed
         $row = $row + "," + $tx_confirmed_at_height
-        $row = $row + "," + $tx_fee_amount
         $row = $row + "," + $tx_memofields
         $row = $row + "," + $tx_removals
         $row = $row + "," + $tx_sent
@@ -248,4 +250,11 @@ cd $scripthome
 #            - Output was sent to the screen. Must use command line redirection to save to a file.
 #                .\getxchtxPS -f 3812331296 -i 1 >my_transactions.csv
 # 
-
+# v0.1.1 - Changes:
+#            - Better documentation. How to Get the Script, How to Open Powershell, How to get 
+#                your fingerprint, How to run the script, How to use Advanced Features or command 
+#                options, Examples of normal output and verbose output.
+#          New features:
+#            - Added Fee Amount into the normal output.
+#            - Added Fingerprint into both normal and verbose output.
+#            - Added Created At Time back into the Verbose output.
