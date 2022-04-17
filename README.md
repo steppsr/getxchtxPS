@@ -33,7 +33,7 @@ C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoLogo -No
 You will need the fingerprint of your wallet. If you don't know the fingerprint you can run the following command:
 
 ```
-chia keys show
+.\chia keys show
 ```
 **Now change to the script directory**
 Now to run the script, you will need change to the directory where you saved the file.
