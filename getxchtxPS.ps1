@@ -78,7 +78,8 @@ if ($fingerprint -eq "") { Write-Output "Error: fingerprint missing."; Usage; Ex
 $scripthome=pwd
 
 # path to chia executable
-$path="$ENV:LOCALAPPDATA\chia-blockchain\app-1.3.2152\resources\app.asar.unpacked\daemon"
+$appfolder=Get-ChildItem $ENV:LOCALAPPDATA\chia-blockchain -Directory -Filter "app*" | Sort-Object -Property Name -Descending | Select-Object -First 1
+$path="$ENV:LOCALAPPDATA\chia-blockchain\" + $appfolder.Name + "\resources\app.asar.unpacked\daemon"
 
 # change working directory into the chia executable path
 cd $path
