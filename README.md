@@ -17,10 +17,15 @@ You can just right-click on the **getxchtxPS.ps1** file and choose _Save link as
 **How to Open Powershell.**
 Type _powershell_ into the search box by the Windows Start button.
 Right-click the Windows Powershell app and choose _Run as Administrator_
-You need to change the directory to the location you have the script. Be sure to replace **steve** with your username, and also **1.3.1** with your current version number.
+You need to change the directory to the location you have the script. Be sure to replace **steve** with your username, and also **1.3.3** with your current version number.
 
 ```
-cd C:\Users\steve\AppData\Local\chia-blockchain\app-1.3.1\resources\app.asar.unpacked\daemon
+cd C:\Users\steve\AppData\Local\chia-blockchain\app-1.3.3\resources\app.asar.unpacked\daemon
+```
+
+**Also path Inside the script.** There is also one line within the script (around line 81) that will need to be updated with your version in the path.
+```
+$path="$ENV:LOCALAPPDATA\chia-blockchain\app-1.3.3\resources\app.asar.unpacked\daemon"
 ```
 
 **Change your Execution Policy for Powershell.** You may need to change the ExecutionPolicy for Powershell so it will allow you to run a script.
