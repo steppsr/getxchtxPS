@@ -255,7 +255,7 @@ foreach ($transaction in $transactions)
 # write the transaction out to the CSV file
 if ($outfile -ne "")
 {
-    Set-Content $outfile $csv.ToString()
+    Set-Content $outfile $csv.ToString() -Encoding ASCII
 } else {
     Write-Output $csv.ToString()
 }
