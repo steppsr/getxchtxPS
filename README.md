@@ -59,6 +59,7 @@ If you want to run the script for more than one **wallet_id** and have all the t
 
 For example, if I wanted to get all the transactions in both my STANDARD_WALLET and the wallet for the Chia Holiday 2021 Token which is in **wallet_id** number **2** for me, then I would run these commands.
 
+A recent Advanced Feature added is the -j command option that will allow you to specify the filename to save the output to in ASCII format.
 ```
 .\getxchtxPS -f 3812331296 -i 1 > chia_transactions.csv
 .\getxchtxPS -f 3812331296 -i 2 >> chia_transactions.csv
@@ -72,6 +73,7 @@ Usage: .\getxchtxPS [OPTIONS]
 Options:
   -f INTEGER       Set the fingerprint to specify which wallet to use  [required]
   -i INTEGER       Id of the wallet to use                             [default: 1; required]
+  -j FILENAME      Output to ASCII file instead of screen              [default: none]
   -o INTEGER       Skip transactions from the beginning of the list    [default: 0; required]
   -l INTEGER       Max number of transactions to return                [default: 4294967295]
   -y YEAR          Filter transactions to given 4-digit year (or all)  [default: all]

@@ -19,6 +19,7 @@ Function Usage() {
     Write-Output "Options:"
     Write-Output "  -f INTEGER       Set the fingerprint to specify which wallet to use  [required]"
     Write-Output "  -i INTEGER       Id of the wallet to use                             [default: 1; required]"
+    Write-Output "  -j FILENAME      Output to ASCII file instead of screen              [default: none]"
     Write-Output "  -o INTEGER       Skip transactions from the beginning of the list    [default: 0; required]"
     Write-Output "  -l INTEGER       Max number of transactions to return                [default: 4294967295]"
     Write-Output "  -y YEAR          Filter transactions to given 4-digit year (or all)  [default: all]"
@@ -54,6 +55,7 @@ $min = 0
 $max = 999999
 $type = -1
 $verbose = "false"
+$outfile = ""
 
 # get the command line arguments, these will override the defaults
 for ( $i = 0; $i -lt $args.count; $i++ ) {
@@ -62,6 +64,7 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
         "-f" {$fingerprint = $args[$i+1]; Break}
         "-y" {$year = $args[$i+1]; Break}
         "-i" {$wallet_id = $args[$i+1]; Break}
+        "-j" {$outfile = $args[$i+1]; Break}
         "-o" {$offset = $args[$i+1]; Break}
         "-l" {$limit = $args[$i+1]; Break}
         "-min" {$min = $args[$i+1]; Break}
@@ -116,7 +119,7 @@ $csv = [System.Text.StringBuilder]::new()
 
 # pull in the transactions from the (corrected) json file
 $fix = $fix.ToString().Remove($fix.ToString().Length -4,1)
-$fix | Out-File $scripthome/alltxs_fixed.json
+$fix | Out-File $scripthome/alltxs_fixed.json -Encoding ASCII
 $transactions = ($fix | ConvertFrom-Json)
 
 # setup a header for both normal and verbose
@@ -190,10 +193,12 @@ foreach ($transaction in $transactions)
     
     # build the removals array into a string for output
     $tx_removefields = ""
+    $newamount = 0
     foreach ($remove in $tx_removals) {
         $tx_removefields = $tx_removefields + $remove
+        $newamount = $newamount + $remove.amount
     }
-
+    
     # build the memo array into a string for output
     $tx_memofields = ""
     foreach ($memo in $tx_memos) {
@@ -208,6 +213,16 @@ foreach ($transaction in $transactions)
 
     # use a place holder for the current price so there is a column in the CSV
     $tx_current_price = 0
+
+    # need to evaluate if Transaction Type is OUTGOING_TX and if so sum up the Removal
+    # amounts and use instead of just tx_amount.
+    if ($tx_typedesc -eq "OUTGOING_TX") {
+        
+        # pull all fields from removals into an array that we loop through and add up
+        # amounts to remove (these are the coins spent, change will come back in a
+        # separate transaction.
+        $tx_amount = Mojo2XCH $newamount
+    }
 
     # these first few fields will be for the normal output
     $row = $fingerprint.ToString()
@@ -225,7 +240,7 @@ foreach ($transaction in $transactions)
         $row = $row + "," + $tx_confirmed
         $row = $row + "," + $tx_confirmed_at_height
         $row = $row + "," + $tx_memofields
-        $row = $row + "," + $tx_removals
+        $row = $row + "," + $tx_removefields
         $row = $row + "," + $tx_sent
         $row = $row + "," + $tx_senttofields
         $row = $row + "," + $tx_spend_bundle
@@ -238,8 +253,12 @@ foreach ($transaction in $transactions)
 }
 
 # write the transaction out to the CSV file
-#Set-Content transactions.csv $csv.ToString()
-Write-Output $csv.ToString()
+if ($outfile -ne "")
+{
+    Set-Content $outfile $csv.ToString()
+} else {
+    Write-Output $csv.ToString()
+}
 
 cd $scripthome
 
@@ -259,3 +278,15 @@ cd $scripthome
 #            - Added Fee Amount into the normal output.
 #            - Added Fingerprint into both normal and verbose output.
 #            - Added Created At Time back into the Verbose output.
+# v0.2.0 - Changes:
+#            - Fixed issue where the script used amount for Outgoing Tx transactions instead of the
+#                Removals totaled amount. Thanks @Jacek-ghub for reporting this critical bug!
+#            - Script now determines the Username & Version automatically without requiring editing
+#                the script prior to using.
+#            - Correct variable name in Verbose Output for the Removal collection which caused the
+#                removals to be empty.
+#          New features:
+#            - Added Encoding ASCII to the JSON file that all transactions are stored in.
+#            - Added command option to set the desired filename for the ASCII output file. This will
+#                write directly to the file without requiring Redirection. No output will be displayed
+#                to the screen during processing.
